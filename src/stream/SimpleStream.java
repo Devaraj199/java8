@@ -25,7 +25,7 @@ public class SimpleStream {
         System.out.println("***********");
         String str[] = {"Deva us","Deva is countable","Germany"};
      Long x =  Arrays.stream(str).
-             flatMap(line->Arrays.stream(line.split("\\s+")))
+              flatMap(line->Arrays.stream(line.split("\\s+")))
              .filter(word->word.equals("Deva")).count();
         System.out.println(x);
 
