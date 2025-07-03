@@ -5,7 +5,7 @@ import java.util.function.UnaryOperator;
 
 public class UnaryOperatorExample {
     public static void main(String[] args) {
-        UnaryOperator<String> convertString = input -> input.toUpperCase();
+        UnaryOperator<String> convertString = String::toUpperCase;
         UnaryOperator<String> sameValue = UnaryOperator.identity();
         UnaryOperator<Integer> multiplyValue = value -> value * 3;
         UnaryOperator<Integer> multiplyValue1 = value -> value * 4;

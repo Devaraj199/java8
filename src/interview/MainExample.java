@@ -26,7 +26,7 @@ public class MainExample {
         // Using flatMap to split and flatten the strings
         List<String> result = str.stream()
                 .flatMap(i -> Arrays.stream(i.split(" ")))
-                .collect(Collectors.toList());
+                .toList();
 //        System.out.println(result);
 
         int[] x = {12,3,0,6,0,3};

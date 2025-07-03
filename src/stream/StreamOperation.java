@@ -37,22 +37,22 @@ public class StreamOperation {
     public static void flatMapInStreams() {
         String[] arrayOfWords = { "Eazy", "Bytes" };
         Stream<String> stringStream = Arrays.stream(arrayOfWords);
-        stringStream.map(w->w.split("")).flatMap(Arrays::stream).forEach(i-> System.out.println(i));
+        stringStream.map(w->w.split("")).flatMap(Arrays::stream).forEach(System.out::println);
 //        System.out.println(stringStream);
-        List<List<String>> list = Arrays.asList( Arrays.asList("Eazy"),
-                Arrays.asList("Bytes"));
+        List<List<String>> list = Arrays.asList(List.of("Eazy"),
+                List.of("Bytes"));
 //        System.out.println(list);
 //        list.stream().map(Collection::stream).forEach(System.out::println);
 //        list.stream().flatMap(Collection::stream).forEach(System.out::println);
 
-        List<List<List<Integer>>> lists = Arrays.asList(Arrays.asList(Arrays.asList(2,3,4),Arrays.asList(6,7,8)));
+        List<List<List<Integer>>> lists = List.of(Arrays.asList(Arrays.asList(2, 3, 4), Arrays.asList(6, 7, 8)));
         List<Integer> x=  lists.
                 stream()
-                .flatMap(a->a.stream())
-                .flatMap(b->b.stream())
+                .flatMap(Collection::stream)
+                .flatMap(Collection::stream)
                 .filter(integer -> integer%2==0)
-                .collect(Collectors.toList());
-        lists.stream().flatMap(a->a.stream()).flatMap(a->a.stream()).filter(i->i%2==0).forEach(i-> System.out.print(" "+i));
+                .toList();
+        lists.stream().flatMap(Collection::stream).flatMap(Collection::stream).filter(i->i%2==0).forEach(i-> System.out.print(" "+i));
 //        System.out.println(x);
 
     }

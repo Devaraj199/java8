@@ -13,7 +13,7 @@ public class Aug05 {
          String[] array = {"Java","Spring Java","Spring python"};
 
         Map<String, Integer> collect = Arrays.stream(array).flatMap(i -> Arrays.stream(i.split(" ")))
-                .collect(Collectors.toMap(i->i,i->i.length(),(a,b)->a));
+                .collect(Collectors.toMap(i->i, String::length,(a, b)->a));
 //        collect.forEach((k,v)-> System.out.println(" "+k+"  "+v));
 
 //        IntStream range = IntStream.range(0, 11);

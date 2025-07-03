@@ -13,7 +13,7 @@ public class Problem2 {
         map.put("Madan",1600);
         Map<String,Integer> filterMap = map.entrySet().stream()
                 .filter(e->e.getValue()>1300)
-                .collect(Collectors.toMap(i->i.getKey(),i->i.getValue()));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         System.out.println(filterMap);
    Map<Integer,List<String>> groupingBy =
            map.entrySet().

@@ -25,8 +25,8 @@ public class Day1 {
                 .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
                 .entrySet().stream()
                 .filter(x->x.getValue()>1)
-                .map(i->i.getKey())
-                .collect(Collectors.toList());
+                .map(Map.Entry::getKey)
+                .toList();
         System.out.println("Duplicate chars are---"+duplicateString);
 
 //        Q3: Java program to find Unique character of String?
@@ -35,8 +35,8 @@ public class Day1 {
                 .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
                 .entrySet().stream()
                 .filter(x->x.getValue()==1)
-                .map(i->i.getKey())
-                .collect(Collectors.toList());
+                .map(Map.Entry::getKey)
+                .toList();
         System.out.println("Unique chars are---"+uniqueString);
 
         //        Q4: Java program to find First non repeat of String?

@@ -23,20 +23,20 @@ public class Practice {
    public static void practiceInterview1(){
 
         List<Integer> listofLength = Stream.of("Mango","Banana","Apple")
-                .map(i->i.length())
-                .collect(Collectors.toList());
+                .map(String::length)
+                .toList();
 //       System.out.println(listofLength);
-       List<String> distinctValue = Stream.of("a","a","b","b","b","c").distinct().collect(Collectors.toList());
+       List<String> distinctValue = Stream.of("a","a","b","b","b","c").distinct().toList();
 //       System.out.println(distinctValue);
 
        List<Integer> listofInteger = Stream.iterate(1,n->n+1).limit(9).collect(Collectors.toList());
        System.out.println(listofInteger);
        Map<Integer,List<String>> grouped = Stream.of("Apple","Banana","Sapota","Pineaaple")
-               .collect(Collectors.groupingBy(i->i.length()));
+               .collect(Collectors.groupingBy(String::length));
 //       System.out.println(grouped);
        Set<String> stringSet = Stream.of("abc","Raju","Kiran","abc").collect(Collectors.toSet());
        System.out.println(stringSet);
-       Optional<String> joingString = stringSet.stream().collect(Collectors.reducing((s1, s2) -> s1 + s2));
+       Optional<String> joingString = stringSet.stream().reduce((s1, s2) -> s1 + s2);
 //       System.out.println(joingString.get());
        Optional<String> first = Stream.of("apple", "banana", "cherry")
                .findFirst();
@@ -57,7 +57,7 @@ public class Practice {
 //        stringList.addAll(stringList1);
        System.out.println(stringList);
        //Merge
-       List<String> mergeString = Stream.of(stringList,stringList1).flatMap(List::stream).collect(Collectors.toList());
+       List<String> mergeString = Stream.of(stringList,stringList1).flatMap(List::stream).toList();
 //       System.out.println(mergeString);
        String sentence = "This is a this sample sentence";
        Map<Character, Long> letterMap =  sentence.toLowerCase()         // Convert to lowercase
@@ -88,13 +88,12 @@ public class Practice {
         employeeList.add(new Employee("Naveen",7000,"Lawer"));
         employeeList.add(new Employee("Kiran",9000,"Teacher"));
         employeeList.add(new Employee("Pushpa",7500,"Trainer"));
-        Employee highestSalaryEmp = employeeList.stream().
-                sorted(Comparator.comparing(Employee::getEmpSalary).reversed()).findFirst().orElse(null);
+        Employee highestSalaryEmp = employeeList.stream().max(Comparator.comparing(Employee::getEmpSalary)).orElse(null);
         System.out.println(highestSalaryEmp);
         List<Employee> listOfEMp = employeeList.stream()
                 .filter(name->name.getEmpName()
                         .startsWith("R"))
-                .collect(Collectors.toList());
+                .toList();
 
 //       for(Employee e:listOfEMp){
 //           System.out.println(e.getEmpName());
@@ -107,13 +106,13 @@ public class Practice {
              System.out.println(count);
 //             Q3: Find all the department names
         List<String> deptNames = employeeList.stream().
-                filter(i->i.getEmpDesignation().startsWith("T"))
-                .map(i->i.getEmpDesignation())
+                map(Employee::getEmpDesignation)
+                .filter(empDesignation -> empDesignation.startsWith("T"))
                 .collect(Collectors.toList());
         System.out.println(deptNames);
         List<String> empNames = employeeList.stream()
                 .filter(i->i.getEmpSalary()<8000 && i.getEmpName().startsWith("R"))
-                .map(i->i.getEmpName())
+                .map(Employee::getEmpName)
                 .collect(Collectors.toList());
         System.out.println(empNames);
 

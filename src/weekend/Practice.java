@@ -1,9 +1,6 @@
 package weekend;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -35,21 +32,32 @@ public class Practice {
 
 //        2. Shift the array to right to even numbers
         int[] nums = {24,23,0,8,5,12,0};
-        int index = nums.length-1;
+        int right = nums.length-1;
         for(int i = nums.length-1;i>=0;i--){
             if(nums[i]!=0){
-                int temp = nums[index];
-                nums[index]=nums[i];
-                nums[i]=temp;
-                index--;
+                int temp = nums[i];
+                nums[i]=nums[right];
+                nums[right]=temp;
+                right--;
             }
         }
-        System.out.println(Arrays.toString(nums));
+        int[] nums1 = {23,24,65,46};
+        int left = 0;
+        for(int i=0;i< nums1.length;i++){
+            if(nums1[i]%2==0){
+                int temp = nums1[i];
+                nums1[i]= nums1[left];
+                nums1[left]=temp;
+                left++;
+            }
+        }
+        System.out.println(Arrays.toString(nums1));
         String[] str = {"Raju","Kiran","Kiran","Mohan","Deva","Kiran","Deva"};
         String hiString = "";
         long hiVal = 0;
+        Arrays.stream(str).reduce((a1, a2) -> a1.length() > a2.length() ? a1 : a2);
         String hiOcc =   Arrays.stream(str)
-                .collect(Collectors.toMap(Function.identity(),i->i.length(),(a,b)->a, LinkedHashMap::new)).
+                .collect(Collectors.toMap(Function.identity(), String::length,(a, b)->a, LinkedHashMap::new)).
         entrySet()
                 .stream()
                 .max(Map.Entry.comparingByValue())
@@ -60,11 +68,18 @@ public class Practice {
         for(String s : str){
             newMap.put(s,newMap.getOrDefault(s,0)+1);
         }
+
+
+//        for(Map.Entry<String,Integer> entry:newMap.entrySet()){
+//            if(entry.getValue()>num){
+//                num = entry.getValue();
+//                highestOcc = entry.getKey();
+//            }
+//        }
         String highestOcc = "";
         int num = 0;
-
         for(Map.Entry<String,Integer> entry:newMap.entrySet()){
-            if(entry.getValue()>num){
+            if(num> entry.getValue()){
                 num = entry.getValue();
                 highestOcc = entry.getKey();
             }

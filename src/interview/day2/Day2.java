@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 public class Day2 {
     public static void main(String[] args) {
-        int newArray[]={10,20,30,2,3,7,25,27,25};
+        int newArray[]={10,20,30,2,3,7,25};
         int newArr[] = {12,22,34,1,2,32,12};
         int z;
         Arrays.sort(newArr);
@@ -16,10 +16,11 @@ public class Day2 {
         long count = Arrays.stream(newArray).count();//9
         int sum = Arrays.stream(newArray).sum();//149
        double average = Arrays.stream(newArray).average().getAsDouble();//16.555
+        System.out.println(sum);
         List<Integer> integerList = Arrays.stream(newArray)
                 .boxed().
                 filter(i -> i > 10)
-                .collect(Collectors.toList());//[20,30,25,27,25]
+                .toList();//[20,30,25,27,25]
         List<Integer> modifiedValue = Arrays.stream(newArray)
                 .boxed()
                 .filter(i->i%2==0)
@@ -37,9 +38,9 @@ public class Day2 {
                 .findFirst().orElse(null); // 27
         List<Integer> sortedList1=  Arrays.stream(newArray)
                 .boxed()
-                .sorted(Comparator.comparingInt(Integer::intValue)
-                        .reversed())
-                .collect(Collectors.toList());
-        System.out.println(sortedList1);//[30, 27, 25, 25, 20, 10, 7, 3, 2]
+                .sorted(Comparator.reverseOrder()).toList();
+        List<Integer> sortedList2 = Arrays.stream(newArray).boxed().sorted(Comparator.comparing(Integer::intValue).reversed()).toList();
+        System.out.println(sortedList2);
+        System.out.println(sortedList1);
     }
 }

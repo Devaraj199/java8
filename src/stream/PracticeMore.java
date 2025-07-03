@@ -50,7 +50,7 @@ public class PracticeMore {
                 .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
         x.forEach((key,value)->System.out.println("Key-"+key+"-----value-"+value));
 //        Arrays.stream(s1).map(i->i.split("")).flatMap(Arrays::stream).forEach(i-> System.out.println(i));
-        List<Integer> integerList=Arrays.asList(12,4,56,1,3).stream().sorted().collect(Collectors.toList());
+        List<Integer> integerList= Stream.of(12,4,56,1,3).sorted().toList();
 //        System.out.println(integerList);
     }
 }

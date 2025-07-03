@@ -1,16 +1,15 @@
 package problems;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Problem1 {
     public static void main(String[] args) {
-        int nums[] = {1,2,3,4,5};
-        String str[] = {"apple","banana","apple","sapota","apple"};
+        int[] nums = {1,2,3,4,5};
+        String[] str = {"apple","banana","apple","sapota","apple"};
         int[][] matrix = {
                 {1, 2, 3, 4},
                 {5, 6, 7, 8},
@@ -19,24 +18,27 @@ public class Problem1 {
         int[] y = {2,3,4};
        int sum = Arrays.stream(y).sum();
         List<Integer> numbers = Arrays.asList(2, 10, 4, 5, 8);
-       int max =  numbers.stream().mapToInt(Integer::intValue).max().orElse(0);
-        System.out.println(max);
-        System.out.println(sum);
+        Integer i1 = numbers.stream().max(Comparator.comparing(i -> i)).get();
+        System.out.println(i1);
+      int result =  numbers.stream().mapToInt(Integer::intValue).sum();
+        System.out.println(result);
         Arrays.stream(y).forEach(System.out::println);
 //        System.out.println(Arrays.stream(nums).anyMatch(i->i>3));
         System.out.println(Arrays.stream(nums).map(i->i*2).map(i->i/2).sum());
         System.out.println(Arrays.stream(str).filter(fruit->fruit=="bananaa").count());
-        List<Integer> collect = Arrays.asList(Arrays.asList(Arrays.asList(2, 4, 43, 56), Arrays.asList(12, 13, 14)))
-                .stream()
+        List<Integer> collect = Stream.of(Arrays.asList(Arrays.asList(2, 4, 43, 56), Arrays.asList(12, 13, 14)))
                 .flatMap(List::stream)
                 .flatMap(List::stream)
                 .filter(val -> val % 2 == 0)
-                .collect(Collectors.toList());
+                .toList();
+        List<List<Integer>> list = Arrays.asList(Arrays.asList(2, 4, 43, 56), Arrays.asList(12, 13, 14));
+
+        list.stream().flatMap(List::stream).filter(i -> i > 30).toList()
 //        System.out.println(collect);
-        List<List<String>> lists = Arrays.asList(Arrays.asList("Hello", "Kumar","Kumar", "Pradhan"), Arrays.asList("Madam"));
-        Map<String, Integer> collect1 = lists.stream().flatMap(i -> i.stream())
-                .map(va -> va.toUpperCase())
-                .collect(Collectors.toMap(w -> w, w -> w.length(),(a,b)->a));
+        List<List<String>> lists = Arrays.asList(List.of("Hello", "Kumar","Kumar", "Pradhan"), List.of("Madam"));
+        Map<String, Integer> collect1 = lists.stream().flatMap(List::stream)
+                .map(String::toUpperCase)
+                .collect(Collectors.toMap(w -> w, String::length,(a, b)->a));
 
         System.out.println(collect1);
     }

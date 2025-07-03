@@ -16,7 +16,7 @@ public class Practice {
         employeeMap.put(new Employee(470, "Bimal", "DEFENCE", 500000), 50);
         employeeMap.put(new Employee(624, "Sourav", "CORE", 400000), 40);
         employeeMap.put(new Employee(284, "Prakash", "SOCIAL", 1200000), 120);
-        Double collect = employeeMap.entrySet().stream().collect(Collectors.averagingDouble(i -> i.getKey().getSalary()));
+        Double collect = employeeMap.keySet().stream().collect(Collectors.averagingDouble(Employee::getSalary));
         System.out.println(collect);
     }
 }

@@ -9,7 +9,7 @@ interface PermissionRequired {
 
 // Class implementing the marker interface
 
-public class MarkerInterface implements Serializable {
+public class MarkerInterface implements Serializable,PermissionRequired {
     private String name;
     private int age;
 
